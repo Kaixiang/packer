@@ -11,6 +11,7 @@ import (
 // image and details on how to access that launched image.
 type RunConfig struct {
 	SourceImage   string `mapstructure:"source_image"`
+	Network       string `mapstructure:"network"`
 	Flavor        string `mapstructure:"flavor"`
 	RawSSHTimeout string `mapstructure:"ssh_timeout"`
 	SSHUsername   string `mapstructure:"ssh_username"`

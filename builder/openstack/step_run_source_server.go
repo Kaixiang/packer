@@ -12,6 +12,7 @@ type StepRunSourceServer struct {
 	Flavor      string
 	Name        string
 	SourceImage string
+  Network     string
 
 	server *gophercloud.Server
 }
@@ -21,12 +22,18 @@ func (s *StepRunSourceServer) Run(state multistep.StateBag) multistep.StepAction
 	keyName := state.Get("keyPair").(string)
 	ui := state.Get("ui").(packer.Ui)
 
-	// XXX - validate image and flavor is available
+  network:= gophercloud.NetworkConfig{
+    Uuid:    s.Network,
+  }
+  networks:= make([]gophercloud.NetworkConfig, 1)
+  networks[0] = network
 
+	// XXX - validate image and flavor is available
 	server := gophercloud.NewServer{
 		Name:        s.Name,
 		ImageRef:    s.SourceImage,
 		FlavorRef:   s.Flavor,
+    Networks:    networks,
 		KeyPairName: keyName,
 	}
 

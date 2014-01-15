@@ -88,6 +88,7 @@ func (b *Builder) Run(ui packer.Ui, hook packer.Hook, cache packer.Cache) (packe
 		&StepRunSourceServer{
 			Name:        b.config.ImageName,
 			Flavor:      b.config.Flavor,
+      Network:     b.config.Network,
 			SourceImage: b.config.SourceImage,
 		},
 		&common.StepConnectSSH{
